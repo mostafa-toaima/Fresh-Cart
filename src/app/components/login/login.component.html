@@ -1,1 +1,79 @@
-<p>login works!</p>
+<section class="w-75 mx-auto shadow rounded p-4 my-3 bg-main-light">
+  <h2 class="my-3">Login Now !</h2>
+  <form [formGroup]="loginForm" (ngSubmit)="loginHandel(loginForm)">
+
+    <div class="form-item">
+      <label for="email">Email</label>
+      <input
+        formControlName="email"
+        type="email"
+        placeholder="Write your email..."
+        class="form-control"
+        id="email"
+      />
+      <div
+        class="alert alert-danger p-0 small"
+        *ngIf="
+          loginForm.get('email')?.errors &&
+          loginForm.get('email')?.touched
+        "
+      >
+        <p
+          class="text-center mb-0"
+          *ngIf="loginForm.get('name')?.getError('required')"
+        >
+          Email is required
+        </p>
+        <p
+          class="text-center mb-0"
+          *ngIf="loginForm.get('name')?.getError('email')"
+        >
+          Invalid Email
+        </p>
+      </div>
+    </div>
+
+    <div class="form-item">
+      <label for="password">Password</label>
+      <input
+        formControlName="password"
+        type="password"
+        placeholder="Write your password..."
+        class="form-control"
+        id="password"
+      />
+
+      <div
+        class="alert alert-danger p-0 small"
+        *ngIf="
+          loginForm.get('password')?.errors &&
+          loginForm.get('password')?.touched
+        "
+      >
+        <p
+          class="text-center mb-0"
+          *ngIf="loginForm.get('password')?.getError('required')"
+        >
+          Password is required
+        </p>
+        <p
+          class="text-center mb-0"
+          *ngIf="loginForm.get('password')?.getError('pattern')"
+        >
+          Password must start with an uppercase letter followed by 5 to 8
+          lowercase letters or numbers.
+        </p>
+      </div>
+    </div>
+    
+    <div>
+      <button
+        [disabled]="loginForm.invalid"
+        type="submit"
+        class="main-btn mt-2 d-block ms-auto"
+      >
+        Login
+      </button>
+    </div>
+  </form>
+</section>
