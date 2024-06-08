@@ -19,7 +19,7 @@ import { AuthService } from "../../Core/Services/auth.service";
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
   isLoading: boolean = false;
-  erMsg: string = null;
+  errMsg: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -76,5 +76,6 @@ export class RegisterComponent implements OnInit {
         },
       });
     }
+    registerForm.reset();
   }
 }

@@ -168,9 +168,8 @@
       </button>
     </div>
   </form>
-  <div class="alert alert-danger p-0 small" *ngIf="errMsg != null ">
     <p
-      class="text-center mb-0"
+      class="alert alert-danger text-center mb-0 w-50 mx-auto p-1"
+      *ngIf="errMsg != ''"
     >{{errMsg}}</p>
-  </div>
 </section>
