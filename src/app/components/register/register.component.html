@@ -1,4 +1,4 @@
-<section class="w-75  mx-auto shadow rounded p-4 my-3 bg-main-light">
+<section class="w-75 mx-auto shadow rounded p-4 my-3 bg-main-light">
   <h2 class="my-3">Register Now !</h2>
   <form [formGroup]="registerForm" (ngSubmit)="registerHandel(registerForm)">
     <div class="form-item">
@@ -13,8 +13,7 @@
       <div
         class="alert alert-danger p-0 small"
         *ngIf="
-          registerForm.get('name')?.errors &&
-          registerForm.get('name')?.touched
+          registerForm.get('name')?.errors && registerForm.get('name')?.touched
         "
       >
         <p
@@ -165,7 +164,13 @@
         class="main-btn mt-2 d-block ms-auto"
       >
         SignUp
+        <span *ngIf="isLoading"><i class="fas fa-spin fa-spinner"></i></span>
       </button>
     </div>
   </form>
+  <div class="alert alert-danger p-0 small" *ngIf="errMsg != null ">
+    <p
+      class="text-center mb-0"
+    >{{errMsg}}</p>
+  </div>
 </section>
