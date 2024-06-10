@@ -18,6 +18,8 @@ import { AuthService } from '../../Core/Services/auth.service';
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
+  errMsg: string = '';
+  isLoading: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -40,14 +42,20 @@ export class LoginComponent implements OnInit {
   }
 
   loginHandel(loginForm: FormGroup) {
+    this.isLoading = true;
     if (loginForm.valid) {
       this._AuthService.Login(loginForm.value).subscribe({
         next: (res) => {
           console.log(res);
           this._Router.navigate(['/home']);
+          localStorage.setItem('token', res.token);
+          this._AuthService.decodedToken();
+          this.isLoading = false;
         },
         error: (error) => {
           console.log(error);
+          this.errMsg = error.error.message;
+          this.isLoading = false;
         },
       });
     }

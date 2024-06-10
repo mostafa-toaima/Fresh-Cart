@@ -65,7 +65,7 @@
         </p>
       </div>
     </div>
-    
+
     <div>
       <button
         [disabled]="loginForm.invalid"
@@ -73,7 +73,12 @@
         class="main-btn mt-2 d-block ms-auto"
       >
         Login
+        <span *ngIf="isLoading"><i class="fas fa-spin fa-spinner"></i></span>
       </button>
     </div>
   </form>
+    <p
+      class="alert alert-danger text-center mb-0 w-50 mx-auto p-1"
+      *ngIf="errMsg != ''"
+    >{{errMsg}}</p>
 </section>

@@ -68,6 +68,8 @@ export class RegisterComponent implements OnInit {
           console.log(res);
           this._Router.navigate(["/home"]);
           this.isLoading = false;
+          localStorage.setItem('token', res.token);
+          this._AuthService.decodedToken();
         },
         error: (error) => {
           this.errMsg = error.error.message;
