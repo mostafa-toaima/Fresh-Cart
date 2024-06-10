@@ -8,7 +8,7 @@ import { User } from '../interfaces/user';
 })
 export class AuthService {
   constructor(private http: HttpClient) { }
-  
+
 
   SignUp(userData:User):Observable<any> {
     return this.http.post('https://ecommerce.routemisr.com/api/v1/auth/signup', userData);
@@ -18,4 +18,6 @@ export class AuthService {
     return this.http.post('https://ecommerce.routemisr.com/api/v1/auth/signin', userData);
   }
 
+
+  
 }
