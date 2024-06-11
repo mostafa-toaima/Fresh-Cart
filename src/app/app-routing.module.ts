@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { authGuard } from './Core/Guards/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
+    canActivate:[authGuard],
     loadComponent: () =>
       import('./layouts/blank-layout/blank-layout.component').then(
         (m) => m.BlankLayoutComponent

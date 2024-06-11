@@ -1,1 +1,20 @@
-<p>products works!</p>
+<section class="py-4" *ngIf="products.length > 0">
+  <h2>All Products</h2>
+  <div class="row g-4">
+    <div
+      class="col-sm-6 col-md-4 col-lg-3 col-xl-2"
+      *ngFor="let item of products"
+    >
+      <div class="product h-100 px-2 py-2">
+        <img
+          class="w-100"
+          [src]="item?.imageCover"
+          [title]="item?.title"
+          [alt]="item?.title"
+        />
+        <h3 class="h6">{{ item.title | cutText : 2 }}</h3>
+        <h4 class="h6 text-main">{{ item?.category?.name }}</h4>
+      </div>
+    </div>
+  </div>
+</section>
