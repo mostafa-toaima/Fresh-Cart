@@ -7,13 +7,14 @@ import { RandomSlicePipe } from '../../Core/Pipes/random.pipe';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { Categories } from '../../Core/interfaces/categories';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterLink } from '@angular/router';
 
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, CutTextPipe, RandomSlicePipe, CarouselModule],
+  imports: [CommonModule, CutTextPipe, RandomSlicePipe, CarouselModule, RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })

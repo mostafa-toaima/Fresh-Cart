@@ -15,6 +15,10 @@ export class ProductsService {
     return this.http.get(this.baseUrl + '/api/v1/products');
   }
 
+  GetSpecificProduct(id:any): Observable<any> {
+    return this.http.get(this.baseUrl + `/api/v1/products/${id}`);
+  }
+
   GetPopularCategories(): Observable<any> {
     return this.http.get(this.baseUrl + '/api/v1/categories');
   }

@@ -34,6 +34,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'productdetails/:id',
+        loadComponent: () =>
+          import('./components/product-details/product-details.component').then(
+            (m) => m.ProductDetailsComponent
+          ),
+      },
+      {
         path: 'brands',
         loadComponent: () =>
           import('./components/brands/brands.component').then(
