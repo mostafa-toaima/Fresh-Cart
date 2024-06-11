@@ -10,6 +10,18 @@ sans-serif;
 $rating-color: #ffc908;
 $main-transition: 0.8s;
 
+
+::-webkit-scrollbar{
+  width: 10px;
+}
+::-webkit-scrollbar-track{
+  background-color: $light-color;
+}
+
+::-webkit-scrollbar-thumb{
+  background-color: $main-color;
+}
+
 .body{
   font-family: $font-family !important;
 }
