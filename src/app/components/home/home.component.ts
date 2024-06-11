@@ -1,5 +1,6 @@
+import { CartService } from './../../Core/Services/cart.service';
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { ProductsService } from '../../Core/Services/products.service';
 import { CutTextPipe } from '../../Core/Pipes/cut-text.pipe';
 import { Product } from '../../Core/interfaces/product';
@@ -8,21 +9,32 @@ import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { Categories } from '../../Core/interfaces/categories';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterLink } from '@angular/router';
-
-
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, CutTextPipe, RandomSlicePipe, CarouselModule, RouterLink],
+  imports: [
+    CommonModule,
+    CutTextPipe,
+    RandomSlicePipe,
+    CarouselModule,
+    RouterLink,
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
 export class HomeComponent implements OnInit {
   products: Product[] = [];
   categories: Categories[] = [];
+  isLoading: boolean = false;
 
-  constructor(private _ProductsService: ProductsService) {}
+  constructor(
+    private _ProductsService: ProductsService,
+    private _CartService: CartService,
+    private _TostarService: ToastrService,
+    private _Render2: Renderer2
+  ) {}
 
   ngOnInit(): void {
     this.getPopularProducts();
@@ -45,11 +57,33 @@ export class HomeComponent implements OnInit {
     this._ProductsService.GetPopularCategories().subscribe({
       next: (res) => {
         console.log(res);
-
         this.categories = res.data;
       },
       error: (error) => {
         console.log(error);
+      },
+    });
+  }
+
+  addToCart(id: any, element: HTMLButtonElement) {
+
+    this._Render2.setAttribute(element, 'disabled', 'true')
+
+
+
+    this.isLoading = true;
+    this._CartService.addToCart(id).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.isLoading = false;
+        this._TostarService.success(res.message);
+    this._Render2.removeAttribute(element, 'disabled');
+      },
+      error: (err) => {
+        console.log(err);
+        this._TostarService.error(err.message);
+        this.isLoading = false;
+        this._Render2.removeAttribute(element, 'disabled');
       },
     });
   }

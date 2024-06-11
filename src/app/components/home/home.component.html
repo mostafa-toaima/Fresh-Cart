@@ -76,7 +76,7 @@
           </div>
         </header>
         <footer>
-          <button class="btn main-btn w-100 my-2">Add To Cart</button>
+          <button (click)="addToCart(item._id, btnAdd)" #btnAdd class="btn main-btn w-100 my-2">+ Add To Cart <i *ngIf="isLoading" class="fas fa-spin fa-spinner"></i></button>
         </footer>
       </div>
     </div>
