@@ -7,7 +7,6 @@ import { Product } from '../../Core/interfaces/product';
 import { RandomSlicePipe } from '../../Core/Pipes/random.pipe';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { Categories } from '../../Core/interfaces/categories';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterLink } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 

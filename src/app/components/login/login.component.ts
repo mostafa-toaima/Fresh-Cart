@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -24,7 +24,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private _Router: Router,
-    private _AuthService: AuthService
+    private _AuthService: AuthService,
+    private _Render2: Renderer2
   ) {}
 
   ngOnInit(): void {
@@ -41,7 +42,8 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  loginHandel(loginForm: FormGroup) {
+  loginHandel(loginForm: FormGroup, btnLogin: HTMLButtonElement) {
+    this._Render2.setAttribute(btnLogin, 'disabled', 'true')
     this.isLoading = true;
     if (loginForm.valid) {
       this._AuthService.Login(loginForm.value).subscribe({
@@ -51,11 +53,13 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('token', res.token);
           this._AuthService.decodedToken();
           this.isLoading = false;
+          this._Render2.removeAttribute(btnLogin, 'disabled');
         },
         error: (error) => {
           console.log(error);
           this.errMsg = error.error.message;
           this.isLoading = false;
+          this._Render2.removeAttribute(btnLogin, 'disabled');
         },
       });
     }
