@@ -1,0 +1,18 @@
+<section class="mx-auto width rounded shadow bg-main-light p-3 mb-3">
+  <h1 class="h2">CheckOut Session</h1>
+  <form [formGroup]="orderForm" (ngSubmit)="handelOrderForm()">
+  <div class="form-item py-2">
+    <label for="details">details</label>
+    <input class="form-control" type="text" id="details" formControlName="details">
+  </div>
+  <div class="form-item py-2">
+    <label for="phone">phone</label>
+    <input class="form-control" type="tel" id="phone" formControlName="phone">
+  </div>
+  <div class="form-item py-2">
+    <label for="city">city</label>
+    <input class="form-control" type="text" id="city" formControlName="city">
+  </div>
+  <button class="main-btn mt-3" type="submit">Checkout</button>
+</form>
+</section>

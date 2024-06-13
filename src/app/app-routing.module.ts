@@ -5,7 +5,7 @@ import { authGuard } from './Core/Guards/auth.guard';
 const routes: Routes = [
   {
     path: '',
-    canActivate:[authGuard],
+    canActivate: [authGuard],
     loadComponent: () =>
       import('./layouts/blank-layout/blank-layout.component').then(
         (m) => m.BlankLayoutComponent
@@ -18,6 +18,7 @@ const routes: Routes = [
           import('./components/home/home.component').then(
             (m) => m.HomeComponent
           ),
+        title: 'Home',
       },
       {
         path: 'cart',
@@ -25,6 +26,7 @@ const routes: Routes = [
           import('./components/cart/cart.component').then(
             (m) => m.CartComponent
           ),
+        title: 'Cart',
       },
       {
         path: 'products',
@@ -32,6 +34,7 @@ const routes: Routes = [
           import('./components/products/products.component').then(
             (m) => m.ProductsComponent
           ),
+        title: 'Products',
       },
       {
         path: 'productdetails/:id',
@@ -39,6 +42,7 @@ const routes: Routes = [
           import('./components/product-details/product-details.component').then(
             (m) => m.ProductDetailsComponent
           ),
+        title: 'Product details',
       },
       {
         path: 'brands',
@@ -46,6 +50,31 @@ const routes: Routes = [
           import('./components/brands/brands.component').then(
             (m) => m.BrandsComponent
           ),
+        title: 'Brands',
+      },
+      {
+        path: 'forgotpassword',
+        loadComponent: () =>
+          import('./components/forgotpassword/forgotpassword.component').then(
+            (m) => m.ForgotpasswordComponent
+          ),
+        title: 'Forgot Password',
+      },
+      {
+        path: 'allorders',
+        loadComponent: () =>
+          import('./components/allorders/allorders.component').then(
+            (m) => m.AllordersComponent
+          ),
+        title: 'All orders',
+      },
+      {
+        path: 'payment/:id',
+        loadComponent: () =>
+          import('./components/payment/payment.component').then(
+            (m) => m.PaymentComponent
+          ),
+        title: 'Payment',
       },
       {
         path: 'categories',
@@ -53,6 +82,7 @@ const routes: Routes = [
           import('./components/categories/categories.component').then(
             (m) => m.CategoriesComponent
           ),
+        title: 'Categories',
       },
     ],
   },
@@ -70,6 +100,7 @@ const routes: Routes = [
           import('./components/login/login.component').then(
             (m) => m.LoginComponent
           ),
+        title: 'Login',
       },
       {
         path: 'register',
@@ -77,10 +108,26 @@ const routes: Routes = [
           import('./components/register/register.component').then(
             (m) => m.RegisterComponent
           ),
+        title: 'Register',
+      },
+      {
+        path: 'forgotpasswordAuth',
+        loadComponent: () =>
+          import('./components/forgotpassword/forgotpassword.component').then(
+            (m) => m.ForgotpasswordComponent
+          ),
+        title: 'Forgot Password',
       },
     ],
   },
-  {path:'**', loadComponent: ()=>import('./components/notfound/notfound.component').then((m)=> m.NotfoundComponent)}
+  {
+    path: '**',
+    loadComponent: () =>
+      import('./components/notfound/notfound.component').then(
+        (m) => m.NotfoundComponent
+      ),
+    title: 'Notfound',
+  },
 ];
 
 @NgModule({

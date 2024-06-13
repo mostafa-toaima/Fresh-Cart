@@ -6,6 +6,7 @@
     <h1 class="h2">Shop Cart</h1>
     <button class="btn btn-sm btn-outline-danger" (click)="clearCart()">Clear Cart</button>
   </div>
+
   <p>
     Total Price :
     <span class="text-main">{{
@@ -57,6 +58,9 @@
       </div>
     </div>
   </div>
+
+  <button class="main-btn mt-3" [routerLink]="['/payment', cartItems._id]">Online Payment</button>
+
 </section>
 
 <ng-template #msg>

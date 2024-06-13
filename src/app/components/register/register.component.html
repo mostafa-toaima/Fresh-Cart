@@ -49,13 +49,13 @@
       >
         <p
           class="text-center mb-0"
-          *ngIf="registerForm.get('name')?.getError('required')"
+          *ngIf="registerForm.get('email')?.getError('required')"
         >
           Email is required
         </p>
         <p
           class="text-center mb-0"
-          *ngIf="registerForm.get('name')?.getError('email')"
+          *ngIf="registerForm.get('email')?.getError('email')"
         >
           Invalid Email
         </p>

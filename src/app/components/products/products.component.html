@@ -1,20 +1,60 @@
 <section class="py-4" *ngIf="products.length > 0">
-  <h2>All Products</h2>
-  <div class="row g-4">
+  <h2 class="text-center">All Products</h2>
+
+  <div class="row justify-content-center g-4">
     <div
       class="col-sm-6 col-md-4 col-lg-3 col-xl-2"
-      *ngFor="let item of products"
+      *ngFor="
+        let item of products
+          | paginate
+            : {
+                id: 'productPaginate',
+                itemsPerPage: pageSize,
+                currentPage: currentPage,
+                totalItems: total
+              }
+      "
     >
       <div class="product h-100 px-2 py-2">
-        <img
-          class="w-100"
-          [src]="item?.imageCover"
-          [title]="item?.title"
-          [alt]="item?.title"
-        />
-        <h3 class="h6">{{ item.title | cutText : 2 }}</h3>
-        <h4 class="h6 text-main">{{ item?.category?.name }}</h4>
+        <header>
+          <img
+            class="w-100"
+            [src]="item?.imageCover"
+            [title]="item?.title"
+            [alt]="item?.title"
+          />
+          <h3 class="h6">{{ item.title | cutText : 2 }}</h3>
+          <h4 class="h6 text-main">{{ item?.category?.name }}</h4>
+        </header>
+        <footer>
+          <button
+            (click)="addToCart(item._id, btnAdd)"
+            #btnAdd
+            class="btn main-btn w-100 my-2"
+          >
+            + Add To Cart
+            <i *ngIf="btnAdd.disabled" class="fas fa-spin fa-spinner"></i>
+          </button>
+        </footer>
       </div>
     </div>
+  </div>
+  <div class="pt-4 text-main text-center">
+    <pagination-controls
+      class="text-main"
+      id="productPaginate"
+      (pageChange)="pageChanged($event)"
+      (pageBoundsCorrection)="pageChanged($event)"
+      [maxSize]="9"
+      [directionLinks]="true"
+      [autoHide]="true"
+      [responsive]="true"
+      previousLabel="Previous"
+      nextLabel="Next"
+      screenReaderPaginationLabel="Pagination"
+      screenReaderPageLabel="page"
+      screenReaderCurrentLabel="You're on page"
+    >
+    </pagination-controls>
   </div>
 </section>

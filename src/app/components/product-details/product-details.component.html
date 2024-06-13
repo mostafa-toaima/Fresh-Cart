@@ -25,7 +25,10 @@
             >{{ productDetails?.ratingsAverage }}
           </p>
         </div>
-        <button class="main-btn w-100">Add To Cart</button>
+        <div class="d-flex justify-content-between ">
+          <button (click)="addToCart(productDetails._id, btnAdd)" #btnAdd class="btn w-75 mx-auto main-btn">+ Add To Cart <i *ngIf="btnAdd.disabled" class="fas fa-spin fa-spinner"></i></button>
+          <button routerLink="/home"  class="btn btn-danger w-25 mx-auto ms-2" >Back</button>
+        </div>
       </div>
     </div>
   </div>

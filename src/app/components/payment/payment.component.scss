@@ -1,0 +1,19 @@
+  @media only screen and (max-width: 575px) {
+
+    .width,
+    .container,
+    .container-md,
+    .container-sm {
+      max-width: 300px !important;
+    }
+  }
+
+  @media only screen and (min-width: 576px) and (max-width: 1400px) {
+
+    .width,
+    .container,
+    .container-md,
+    .container-sm {
+      max-width: 400px !important;
+    }
+  }

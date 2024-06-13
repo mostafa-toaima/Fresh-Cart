@@ -19,7 +19,7 @@
       >
         <p
           class="text-center mb-0"
-          *ngIf="loginForm.get('name')?.getError('required')"
+          *ngIf="loginForm.get('email')?.getError('required')"
         >
           Email is required
         </p>
@@ -32,7 +32,7 @@
       </div>
     </div>
 
-    <div class="form-item  py-2">
+    <div class="form-item  py-1">
       <label for="password">Password</label>
       <input
         formControlName="password"
@@ -64,17 +64,17 @@
         </p>
       </div>
     </div>
-
-    <div>
+    <div class="d-flex justify-content-between align-items-center">
       <button
         #btnLogin
         [disabled]="loginForm.invalid"
         type="submit"
-        class="main-btn mt-2 d-block ms-auto"
+        class="main-btn mt-2 "
       >
         Login
         <span *ngIf="isLoading"><i class="fas fa-spin fa-spinner"></i></span>
       </button>
+      <a routerLink="/forgotpasswordAuth" class="link-primary mt-2">Forget Password ?</a>
     </div>
   </form>
     <p

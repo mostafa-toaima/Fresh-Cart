@@ -65,18 +65,17 @@ export class HomeComponent implements OnInit {
   }
 
   addToCart(id: any, element: HTMLButtonElement) {
-
     this._Render2.setAttribute(element, 'disabled', 'true')
-
-
-
     this.isLoading = true;
     this._CartService.addToCart(id).subscribe({
       next: (res) => {
         console.log(res);
         this.isLoading = false;
         this._TostarService.success(res.message);
-    this._Render2.removeAttribute(element, 'disabled');
+        this._Render2.removeAttribute(element, 'disabled');
+
+        this._CartService.cartNumber.next(res.numOfCartItems)
+
       },
       error: (err) => {
         console.log(err);

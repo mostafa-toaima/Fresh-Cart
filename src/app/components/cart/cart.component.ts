@@ -3,12 +3,15 @@ import { Component, OnInit, Renderer2 } from '@angular/core';
 import { CartService } from '../../Core/Services/cart.service';
 import { CutTextPipe } from '../../Core/Pipes/cut-text.pipe';
 import { ToastrService } from 'ngx-toastr';
+import { RouterLink } from '@angular/router';
+
+
 
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [CommonModule, CutTextPipe],
+  imports: [CommonModule, CutTextPipe, RouterLink],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss',
 })
@@ -63,6 +66,7 @@ export class CartComponent implements OnInit {
       this._CartService.removeSpecificItem(productId).subscribe((res) => {
         this.cartItems = res.data;
         this._TostarService.info("Item removed")
+        this._CartService.cartNumber.next(res.numOfCartItems);
       });
     }
   }
@@ -74,6 +78,7 @@ export class CartComponent implements OnInit {
         console.log(response);
         this.cartItems = response.data;
         this._Render2.removeAttribute(btnRef, 'disabled');
+        this._CartService.cartNumber.next(response.numOfCartItems);
       },
       error: (error) => {
         console.log(error);
