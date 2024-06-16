@@ -1,5 +1,4 @@
 <section class="py-4" *ngIf="products.length > 0">
-  <h2 class="text-center">All Products</h2>
 
   <div class="row justify-content-center g-4">
     <div
@@ -16,6 +15,16 @@
       "
     >
       <div class="product h-100 px-2 py-2">
+        <i
+          *ngIf="!wishListData.includes(item._id)"
+          (click)="addFav(item._id)"
+          class="fa-regular text-danger fa-heart heart"
+        ></i>
+        <i
+          *ngIf="wishListData.includes(item._id)"
+          (click)="removeFav(item._id)"
+          class="fa-solid text-danger fa-heart heart"
+        ></i>
         <header>
           <img
             class="w-100"
@@ -25,6 +34,19 @@
           />
           <h3 class="h6">{{ item.title | cutText : 2 }}</h3>
           <h4 class="h6 text-main">{{ item?.category?.name }}</h4>
+          <div class="d-flex align-items-center justify-content-between small">
+            <span>
+              {{ item.price | currency : "EGP " }}
+            </span>
+            <p class="mb-0">
+              <i
+                [class.rating-color]="item.ratingsAverage >= num"
+                *ngFor="let num of [1, 2, 3, 4, 5]"
+                class="fas fa-star font-sm"
+              ></i>
+              <span class="text-muted">{{ item.ratingsAverage }}</span>
+            </p>
+          </div>
         </header>
         <footer>
           <button
@@ -41,7 +63,6 @@
   </div>
   <div class="pt-4 text-main text-center">
     <pagination-controls
-      class="text-main"
       id="productPaginate"
       (pageChange)="pageChanged($event)"
       (pageBoundsCorrection)="pageChanged($event)"

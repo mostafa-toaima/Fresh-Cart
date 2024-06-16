@@ -1,37 +1,58 @@
-<section class="py-3">
-  <div class="row gx-0">
-    <div class="col-md-9">
+<!-- Main Slider -->
+<section>
+  <div class="row g-0">
+    <div class="col-md-6">
       <owl-carousel-o [options]="mainSlideOptions">
         <ng-template carouselSlide>
-          <img height="400" src="./assets/slider-image-1.jpeg" alt="slide1" />
+          <img
+            class="w-100 me-5"
+            height="400px"
+            src="./assets/images/slider-2.jpeg"
+            alt="slide1"
+          />
         </ng-template>
         <ng-template carouselSlide>
-          <img height="400" src="./assets/slider-image-2.jpeg" alt="slide2" />
+          <img
+            class="w-100 me-5"
+            height="400px"
+            src="./assets/slider-image-2.jpeg"
+            alt="slide2"
+          />
         </ng-template>
         <ng-template carouselSlide>
-          <img height="400" src="./assets/slider-image-3.jpeg" alt="slide3" />
+          <img
+            class="w-100 me-5"
+            height="400px"
+            src="./assets/slider-image-3.jpeg"
+            alt="slide3"
+          />
         </ng-template>
       </owl-carousel-o>
     </div>
-    <div class="col-md-3">
+
+    <div class="col-md-6">
       <img
-        height="200"
+        height="200px"
         class="w-100"
         src="./assets/grocery-banner-2.jpeg"
         alt="slide5"
       />
       <img
-        height="200"
+        height="200px"
         class="w-100"
-        src="../../../assets/banner-4.jpeg"
+        src="../../../assets/grocery-banner.png"
         alt="slide4"
       />
     </div>
   </div>
 </section>
 
-<section class="py-4" *ngIf="categories.length > 0">
-  <h2 class="text-center text-muted py-2">Popular Categories</h2>
+<!-- Category Slider -->
+<section
+  class="py-4 my-4 border border-success bg-main-light"
+  *ngIf="categories.length > 0"
+>
+  <h1 class="h3 m-3 fw-bold text-main">Shop Popular Categories</h1>
 
   <owl-carousel-o [options]="categoryOptions">
     <ng-container *ngFor="let category of categories">
@@ -48,35 +69,77 @@
   </owl-carousel-o>
 </section>
 
+<!-- Products-->
 <section class="py-4" *ngIf="products.length > 0">
-  <h2 class="text-center text-muted py-2">Popular Products</h2>
+  <h2 class="text-center h1 m-3 fw-bold text-main">Popular Products</h2>
+  <h4 class="text-center text-main">Search Here:</h4>
+  <input
+    [(ngModel)]="term"
+    type="search"
+    class="form-control w-50 mx-auto mb-5 mt-2"
+    placeholder="Search Here.."
+  />
   <div class="row g-4">
     <div
       class="col-sm-6 col-md-4 col-lg-3 col-xl-2"
-      *ngFor="let item of products | randomSlice"
+      *ngFor="let item of products | search : term | randomSlice"
     >
-      <div class="product h-100 px-2 py-2">
-        <header role="button" [routerLink]="['/productdetails', item._id]" >
+      <div class="product h-100">
+        <i
+          *ngIf="!wishListData.includes(item._id)"
+          (click)="addFav(item._id)"
+          class="fa-regular text-danger fa-heart heart"
+        ></i>
+        <i
+          *ngIf="wishListData.includes(item._id)"
+          (click)="removeFav(item._id)"
+          class="fa-solid text-danger fa-heart heart"
+        ></i>
+
+        <header role="button" [routerLink]="['/productdetails', item._id]">
           <img
             class="w-100"
             [src]="item?.imageCover"
             [title]="item?.title"
             [alt]="item?.title"
           />
-          <h3 class="h6 text-muted">{{ item.title | cutText : 2 }}</h3>
+          <h3 class="h6 pt-2">
+            {{ item.title | cutText : 2 | uppercase }}
+          </h3>
           <h4 class="h6 text-main">{{ item?.category?.name }}</h4>
           <div class="d-flex align-items-center justify-content-between small">
             <span>
-              {{ item.price | currency : "e€" }}
+              {{ item.price | currency : "EGP " }}
             </span>
             <p class="mb-0">
-              <i class="fas fa-star rating-color"></i>
+              <!-- rating Color
+
+              <ngb-rating
+                [rate]="product.ratingsAverage"
+                [readonly]="true"
+                [max]="5">
+              </ngb-rating
+                        but we need to import ngbModule
+              -->
+
+              <i
+                [class.rating-color]="item.ratingsAverage >= num"
+                *ngFor="let num of [1, 2, 3, 4, 5]"
+                class="fas fa-star font-sm"
+              ></i>
               <span class="text-muted">{{ item.ratingsAverage }}</span>
             </p>
           </div>
         </header>
         <footer>
-          <button (click)="addToCart(item._id, btnAdd)" #btnAdd class="btn main-btn w-100 my-2">+ Add To Cart <i *ngIf="btnAdd.disabled" class="fas fa-spin fa-spinner"></i></button>
+          <button
+            (click)="addToCart(item._id, btnAdd)"
+            #btnAdd
+            class="btn main-btn w-100 my-2"
+          >
+            + Add To Cart
+            <i *ngIf="btnAdd.disabled" class="fas fa-spin fa-spinner"></i>
+          </button>
         </footer>
       </div>
     </div>

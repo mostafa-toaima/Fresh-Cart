@@ -37,4 +37,10 @@ export class AuthService {
       }
     }
   }
+
+  updatePassword(updateData: object) : Observable<any> {
+    return this.http.put(
+      'https://ecommerce.routemisr.com/api/v1/users/changeMyPassword', updateData
+    );
+  }
 }

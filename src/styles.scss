@@ -1,11 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@300&display=swap");
+
 $main-color:#0aad0a;
 $light-color: #f0f3f2;
 $shadow: rgba(145, 158 ,171 , 0.2) 0px 2px 4px -1px,
     rgba(145, 158, 171, 0.14) 0px 4px 5px 0px,
     rgba(145, 158, 171, 0.12) 0px 1px 10px 0px;
-$font-family: 'Encode Sans Expanded',
+$font-family:"Encode Sans Expanded",
 sans-serif;
 $rating-color: #ffc908;
 $main-transition: 0.8s;
@@ -22,14 +23,37 @@ $main-transition: 0.8s;
   background-color: $main-color;
 }
 
-.body{
-  font-family: $font-family !important;
+body{
+  font-family: $font-family !important ;
 }
 
 a,
 a:hover {
   color: black ;
   text-decoration: none !important;
+}
+
+.product{
+    padding: 6px;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+
+    &:hover{
+      .heart{
+        right: 5px;
+      }
+    }
+
+    .heart{
+      transition: right 0.7s;
+      font-size: 35px;
+      top: 5px;
+      right: -50px;
+      position: absolute;
+      z-index: 99;
+      cursor: pointer;
+    }
 }
 
 .product:hover {
@@ -98,4 +122,5 @@ a:hover {
   background-color: $main-color !important;
   border-radius: 5px !important;
 }
+
 

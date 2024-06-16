@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { authGuard } from './Core/Guards/auth.guard';
+import { authGuard, authGuardLogin } from './Core/Guards/auth.guard';
 
 const routes: Routes = [
   {
-    path: '',
     canActivate: [authGuard],
+    path: '',
     loadComponent: () =>
       import('./layouts/blank-layout/blank-layout.component').then(
         (m) => m.BlankLayoutComponent
@@ -37,6 +37,14 @@ const routes: Routes = [
         title: 'Products',
       },
       {
+        path: 'wishlist',
+        loadComponent: () =>
+          import('./components/wishlist/wishlist.component').then(
+            (m) => m.WishlistComponent
+          ),
+        title: 'Wish List',
+      },
+      {
         path: 'productdetails/:id',
         loadComponent: () =>
           import('./components/product-details/product-details.component').then(
@@ -59,6 +67,14 @@ const routes: Routes = [
             (m) => m.ForgotpasswordComponent
           ),
         title: 'Forgot Password',
+      },
+      {
+        path: 'updatepassword',
+        loadComponent: () =>
+          import('./components/update-password/update-password.component').then(
+            (m) => m.UpdatePasswordComponent
+          ),
+        title: 'Update Password',
       },
       {
         path: 'allorders',
@@ -84,9 +100,19 @@ const routes: Routes = [
           ),
         title: 'Categories',
       },
+      {
+        path: 'categorydetails/:id',
+        loadComponent: () =>
+          import('./components/categoreydetails/categoreydetails.component').then(
+            (m) => m.CategoreydetailsComponent
+          ),
+        title: 'Category details',
+      },
     ],
   },
+
   {
+    canActivate:[authGuardLogin],
     path: '',
     loadComponent: () =>
       import('./layouts/auth-layout/auth-layout.component').then(
@@ -131,7 +157,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, {
+      scrollPositionRestoration: 'enabled',
+    }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

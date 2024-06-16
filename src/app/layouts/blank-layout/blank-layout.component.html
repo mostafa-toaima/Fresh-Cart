@@ -1,6 +1,9 @@
 <app-nav-blank></app-nav-blank>
-<div class="container-fluid main-section">
+<main class="container-fluid">
   <router-outlet></router-outlet>
-</div>
+</main>
 <app-footer></app-footer>
-<button #btnUp (click)="goToUp()" class="btn-up display"><i class="fas fa-angle-double-up"></i></button>
+
+<button (click)="goToUp()" #goUp class="go-up hide">
+  <i class="fa-solid fa-angle-up" style="color: #18812d"></i>
+</button>

@@ -1,3 +1,4 @@
+import { WishlistService } from './../../Core/Services/wishlist.service';
 import { CartService } from './../../Core/Services/cart.service';
 import { CommonModule } from '@angular/common';
 import {
@@ -26,23 +27,27 @@ export class NavBlankComponent implements OnInit {
   constructor(
     private _Router: Router,
     private _CartService: CartService,
-    private _Renderer2: Renderer2
+    private _Renderer2: Renderer2,
+    private _WishlistService: WishlistService
   ) {}
 
-  @ViewChild('navBar') navElement!: ElementRef;
+  @ViewChild('navBar', { static: false }) navElement!: ElementRef;
 
   @HostListener('window:scroll')
   onScroll(): void {
-    if (scrollY > 300) {
-      this._Renderer2.addClass(this.navElement.nativeElement, 'px-5');
-      this._Renderer2.addClass(this.navElement.nativeElement, 'shadow');
-    } else {
-      this._Renderer2.removeClass(this.navElement.nativeElement, 'px-5');
-      this._Renderer2.removeClass(this.navElement.nativeElement, 'shadow');
+    if (this.navElement) {
+      if (window.scrollY > 50) {
+        this._Renderer2.addClass(this.navElement.nativeElement, 'px-5');
+        this._Renderer2.addClass(this.navElement.nativeElement, 'shadow');
+      } else {
+        this._Renderer2.removeClass(this.navElement.nativeElement, 'px-5');
+        this._Renderer2.removeClass(this.navElement.nativeElement, 'shadow');
+      }
     }
   }
 
   cartNumOfItems: number = 0;
+  whishItemNumber: number = 0;
 
   ngOnInit(): void {
     this._CartService.cartNumber.subscribe({
@@ -56,9 +61,24 @@ export class NavBlankComponent implements OnInit {
         this.cartNumOfItems = response.numOfCartItems;
       },
     });
+
+    //wishList
+    this._WishlistService.whishItemNumber.subscribe({
+      next: (dataNum) => {
+        this.whishItemNumber = dataNum;
+      }
+    })
+    this._WishlistService.getLoggedUserWishlist().subscribe({
+      next: (dataNum) => {
+        this.whishItemNumber = dataNum.count;
+        console.log(this.whishItemNumber);
+
+      }
+    })
+
   }
 
-  signOut() {
+  logOut() {
     localStorage.removeItem('token');
     this._Router.navigate(['/login']);
   }

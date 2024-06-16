@@ -1,25 +1,29 @@
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import {
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-
-
 @Injectable()
-export class myhttpInterceptor implements HttpInterceptor{
-  constructor() { }
+export class myhttpInterceptor implements HttpInterceptor {
+  constructor() {}
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+  intercept(
+    req: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<unknown>> {
     if (localStorage.getItem('token') != null) {
-
       const myToken: any = {
-        token: localStorage.getItem('token')
-      }
+        token: localStorage.getItem('token'),
+      };
 
       req = req.clone({
-        setHeaders: myToken
-      })
-
+        setHeaders: myToken,
+      });
     }
-    return next.handle(req)
+    return next.handle(req);
   }
 }

@@ -74,11 +74,11 @@
         Login
         <span *ngIf="isLoading"><i class="fas fa-spin fa-spinner"></i></span>
       </button>
-      <a routerLink="/forgotpasswordAuth" class="link-primary mt-2">Forget Password ?</a>
+      <a  role="button" routerLink="/forgotpasswordAuth" class="link-primary mt-2">Forget Password ?</a>
     </div>
   </form>
     <p
-      class="alert alert-danger text-center mb-0 w-50 mx-auto p-1"
+      class="alert alert-danger text-center mb-0 w-75 mx-auto p-1"
       *ngIf="errMsg != ''"
     >{{errMsg}}</p>
 </section>

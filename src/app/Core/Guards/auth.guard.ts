@@ -14,3 +14,15 @@ export const authGuard: CanActivateFn = (route, state) => {
     return false;
   }
 };
+
+
+export const authGuardLogin: CanActivateFn = (route, state) => {
+  const _Router = inject(Router);
+
+  if (localStorage.getItem('_token')) {
+    _Router.navigate(['/home']);
+    return false;
+  } else {
+    return true;
+  }
+};

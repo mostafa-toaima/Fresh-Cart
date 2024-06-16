@@ -19,8 +19,12 @@ export class ProductsService {
     return this.http.get(this.baseUrl + `/api/v1/products/${id}`);
   }
 
-  GetPopularCategories(): Observable<any> {
+  GetCategories(): Observable<any> {
     return this.http.get(this.baseUrl + '/api/v1/categories');
+  }
+
+  GetCategoryDetails(catId: string | null): Observable<any> {
+    return this.http.get(this.baseUrl + `/api/v1/categories/${catId}`);
   }
 
 }

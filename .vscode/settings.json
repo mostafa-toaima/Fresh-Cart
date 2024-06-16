@@ -1,10 +1,14 @@
 {
   "cSpell.words": [
     "Allorders",
+    "Categoreydetails",
+    "categorydetails",
     "Forgetpass",
     "forgotpassword",
     "myhttp",
     "productdetails",
-    "Tostar"
+    "Toastr",
+    "Tostar",
+    "updatepassword"
   ]
 }
